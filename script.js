@@ -1,7 +1,17 @@
-// Função para alternar o formulário do WhatsApp
+// Função para mostrar/esconder o formulário do WhatsApp
 function toggleForm() {
   const form = document.getElementById('whatsappForm');
-  form.style.display = form.style.display === 'none' ? 'block' : 'none';
+  if (form.style.display === 'none' || form.style.display === '') {
+    form.style.display = 'block';
+    form.style.opacity = '1';
+    form.style.transform = 'translateY(0)';
+  } else {
+    form.style.opacity = '0';
+    form.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+      form.style.display = 'none';
+    }, 300);
+  }
 }
 
 // Função para formatar o número de telefone
@@ -110,7 +120,7 @@ async function handleSubmit(event) {
 }
 
 // Função para enviar mensagem via WhatsApp
-function enviarWhatsApp() {
+async function enviarWhatsApp() {
   const nome = document.getElementById('nome').value;
   const telefone = document.getElementById('telefone').value;
   const mensagem = document.getElementById('mensagem').value;
@@ -120,7 +130,62 @@ function enviarWhatsApp() {
     return;
   }
   
-  const texto = `Olá! Me chamo ${nome}.\n${mensagem}`;
-  const url = `https://wa.me/5549999135370?text=${encodeURIComponent(texto)}`;
-  window.open(url, '_blank');
+  try {
+    // Prepara os dados para a API
+    const formData = {
+      nome: nome,
+      telefone: telefone,
+      mensagem: mensagem,
+      origem: 'WhatsApp'
+    };
+    
+    console.log('Enviando dados para API:', formData);
+    
+    // Envia os dados para a API
+    const response = await fetch('/api/send-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    });
+    
+    // Verifica se a resposta é JSON
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      console.error('Resposta não é JSON:', await response.text());
+      throw new Error('Resposta do servidor não é JSON válido');
+    }
+    
+    const data = await response.json();
+    console.log('Resposta da API:', data);
+    
+    if (!response.ok) {
+      throw new Error(data.error?.message || data.error || 'Erro ao enviar mensagem');
+    }
+    
+    // Se o e-mail foi enviado com sucesso, redireciona para o WhatsApp
+    const texto = `Olá! Me chamo ${nome}.\n${mensagem}`;
+    const url = `https://wa.me/5549999135370?text=${encodeURIComponent(texto)}`;
+    
+    // Limpa os campos e fecha o formulário
+    document.getElementById('nome').value = '';
+    document.getElementById('telefone').value = '';
+    document.getElementById('mensagem').value = '';
+    
+    const form = document.getElementById('whatsappForm');
+    form.style.opacity = '0';
+    form.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+      form.style.display = 'none';
+    }, 300);
+    
+    // Abre o WhatsApp em uma nova aba
+    window.open(url, '_blank');
+    
+  } catch (error) {
+    console.error('Erro ao enviar mensagem:', error);
+    alert('Erro ao enviar mensagem. Por favor, tente novamente.');
+  }
 } 
