@@ -569,4 +569,8 @@ section:not(.light-section) .section-header h2::after {
   white-space: nowrap;
   border-width: 0;
   display: none;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
 } 
