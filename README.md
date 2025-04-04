@@ -1,6 +1,6 @@
 # 300HUB - Site Institucional
 
-Site institucional da 300HUB, uma consultoria de tecnologia especializada em integrações, sistemas, dados e soluções digitais.
+Site institucional da 300HUB, uma consultoria tech especializada em integrações, sistemas, dados e soluções digitais.
 
 ## Características
 
@@ -17,21 +17,27 @@ Site institucional da 300HUB, uma consultoria de tecnologia especializada em int
 - CSS3
 - JavaScript
 - SVG
+- GitHub Pages para hospedagem
 
 ## Estrutura do Projeto
 
-```
-.
-├── index.html          # Página principal
-├── styles.css          # Estilos CSS
-├── favicon.svg         # Ícone do site
-└── README.md           # Documentação
-```
+- `index.html` - Página principal do site
+- `styles.css` - Estilos CSS
+- `script.js` - Funcionalidades JavaScript
+- `images/` - Diretório com imagens do site
 
-## Como Executar
+## Como Executar Localmente
 
 1. Clone o repositório
 2. Abra o arquivo `index.html` em seu navegador
+
+## Deploy
+
+O site é automaticamente implantado no GitHub Pages quando alterações são enviadas para a branch `master`.
+
+## Domínio Personalizado
+
+O site está configurado para usar o domínio personalizado `300hub.com.br` através do GitHub Pages e Cloudflare.
 
 ## Personalização
 
