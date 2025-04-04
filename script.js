@@ -84,6 +84,7 @@ async function handleSubmit(event) {
     // Verifica se a resposta é JSON
     const contentType = response.headers.get('content-type');
     if (!contentType || !contentType.includes('application/json')) {
+      console.error('Resposta não é JSON:', await response.text());
       throw new Error('Resposta do servidor não é JSON válido');
     }
     
@@ -91,7 +92,7 @@ async function handleSubmit(event) {
     console.log('Resposta da API:', data); // Log para debug
     
     if (!response.ok) {
-      throw new Error(data.error || 'Erro ao enviar mensagem');
+      throw new Error(data.error?.message || data.error || 'Erro ao enviar mensagem');
     }
     
     // Limpa o formulário e mostra mensagem de sucesso
