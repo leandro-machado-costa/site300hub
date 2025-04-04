@@ -5,6 +5,8 @@ function toggleForm() {
     form.style.display = 'none';
   } else {
     form.style.display = 'flex';
+    form.style.opacity = '1';
+    form.style.transform = 'translateY(0)';
   }
 }
 
@@ -44,6 +46,19 @@ document.addEventListener('DOMContentLoaded', function() {
       formatarTelefone(this);
     });
   }
+
+  // Fecha o formulário quando clicar fora dele
+  document.addEventListener('click', function(e) {
+    const form = document.getElementById('whatsappForm');
+    const button = document.querySelector('.whatsapp-button');
+    if (!form.contains(e.target) && !button.contains(e.target) && form.style.display === 'flex') {
+      form.style.opacity = '0';
+      form.style.transform = 'translateY(20px)';
+      setTimeout(() => {
+        form.style.display = 'none';
+      }, 300);
+    }
+  });
 });
 
 // Função para enviar mensagem via WhatsApp
@@ -51,6 +66,7 @@ function enviarWhatsApp() {
   const nome = document.getElementById('nome').value.trim();
   const telefone = document.getElementById('telefone').value.replace(/\D/g, '');
   const mensagem = document.getElementById('mensagem').value.trim();
+  const numeroWhatsApp = '5549999135370';
 
   if (!nome || !telefone || !mensagem) {
     alert('Por favor, preencha todos os campos.');
@@ -62,9 +78,21 @@ function enviarWhatsApp() {
     return;
   }
 
-  const texto = `Olá, meu nome é ${nome}. Meu telefone é ${telefone}. Mensagem: ${mensagem}`;
-  const url = `https://wa.me/55${telefone}?text=${encodeURIComponent(texto)}`;
+  const texto = `Olá, meu nome é ${nome}. ${mensagem}`;
+  const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(texto)}`;
   window.open(url, '_blank');
+  
+  // Limpa os campos e fecha o formulário
+  document.getElementById('nome').value = '';
+  document.getElementById('telefone').value = '';
+  document.getElementById('mensagem').value = '';
+  
+  const form = document.getElementById('whatsappForm');
+  form.style.opacity = '0';
+  form.style.transform = 'translateY(20px)';
+  setTimeout(() => {
+    form.style.display = 'none';
+  }, 300);
 }
 
 // Função para lidar com o envio do formulário de contato
