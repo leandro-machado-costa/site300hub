@@ -1,0 +1,30 @@
+{
+  "name": "300hub-site",
+  "version": "1.0.0",
+  "description": "Site institucional da 300HUB",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "300HUB",
+    "consultoria",
+    "tecnologia",
+    "integrações",
+    "sistemas",
+    "dados",
+    "soluções digitais"
+  ],
+  "author": "300HUB",
+  "license": "MIT",
+  "dependencies": {
+    "resend": "^2.0.0"
+  },
+  "devDependencies": {
+    "serve": "^14.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+} 

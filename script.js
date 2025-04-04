@@ -1,35 +1,20 @@
 // Função para alternar o formulário do WhatsApp
 function toggleForm() {
   const form = document.getElementById('whatsappForm');
-  if (form.style.display === 'flex') {
-    form.style.display = 'none';
-  } else {
-    form.style.display = 'flex';
-    form.style.opacity = '1';
-    form.style.transform = 'translateY(0)';
-  }
+  form.style.display = form.style.display === 'none' ? 'block' : 'none';
 }
 
-// Formatador de telefone
+// Função para formatar o número de telefone
 function formatarTelefone(input) {
-  // Remove tudo que não é número
-  let value = input.value.replace(/\D/g, '');
-  
-  // Limita a 11 dígitos (máximo para celular brasileiro)
-  value = value.substring(0, 11);
-  
-  // Formata o número
-  if (value.length > 0) {
-    value = value.replace(/^(\d{2})(\d)/g, "($1) $2");
-    if (value.length > 10) {
-      value = value.replace(/(\d{5})(\d)/, "$1-$2");
-    }
+  let valor = input.value.replace(/\D/g, '');
+  if (valor.length <= 11) {
+    valor = valor.replace(/^(\d{2})(\d)/g, '($1) $2');
+    valor = valor.replace(/(\d)(\d{4})$/, '$1-$2');
+    input.value = valor;
   }
-  
-  input.value = value;
 }
 
-// Adiciona o evento de formatação aos campos de telefone
+// Inicialização
 document.addEventListener('DOMContentLoaded', function() {
   // Formatação para o campo de telefone do WhatsApp
   const telefoneWhatsApp = document.getElementById('telefone');
@@ -61,50 +46,73 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// Função para enviar mensagem via WhatsApp
-function enviarWhatsApp() {
-  const nome = document.getElementById('nome').value.trim();
-  const telefone = document.getElementById('telefone').value.replace(/\D/g, '');
-  const mensagem = document.getElementById('mensagem').value.trim();
-  const numeroWhatsApp = '5549999135370';
-
-  if (!nome || !telefone || !mensagem) {
-    alert('Por favor, preencha todos os campos.');
-    return;
-  }
-
-  if (telefone.length < 10 || telefone.length > 11) {
-    alert('Por favor, insira um número de telefone válido.');
-    return;
-  }
-
-  const texto = `Olá, meu nome é ${nome}. ${mensagem}`;
-  const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(texto)}`;
-  window.open(url, '_blank');
+// Função para enviar e-mail
+async function handleSubmit(event) {
+  event.preventDefault();
   
-  // Limpa os campos e fecha o formulário
-  document.getElementById('nome').value = '';
-  document.getElementById('telefone').value = '';
-  document.getElementById('mensagem').value = '';
+  const form = event.target;
+  const submitButton = form.querySelector('input[type="submit"]');
+  const originalButtonText = submitButton.value;
   
-  const form = document.getElementById('whatsappForm');
-  form.style.opacity = '0';
-  form.style.transform = 'translateY(20px)';
-  setTimeout(() => {
-    form.style.display = 'none';
-  }, 300);
+  try {
+    // Desabilita o botão e mostra loading
+    submitButton.disabled = true;
+    submitButton.value = 'Enviando...';
+    
+    // Coleta os dados do formulário
+    const formData = {
+      nome: form.nome.value,
+      email: form.email.value,
+      telefone: form.telefone.value,
+      empresa: form.empresa.value,
+      mensagem: form.mensagem.value,
+      origem: window.location.origin
+    };
+    
+    console.log('Enviando dados:', formData); // Log para debug
+    
+    // Envia os dados para a API
+    const response = await fetch('/api/send-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    });
+    
+    const data = await response.json();
+    console.log('Resposta da API:', data); // Log para debug
+    
+    if (!response.ok) {
+      throw new Error(data.error || 'Erro ao enviar mensagem');
+    }
+    
+    // Limpa o formulário e mostra mensagem de sucesso
+    form.reset();
+    alert('Mensagem enviada com sucesso!');
+    
+  } catch (error) {
+    console.error('Erro ao enviar mensagem:', error);
+    alert('Erro ao enviar mensagem. Por favor, tente novamente.');
+  } finally {
+    // Restaura o botão
+    submitButton.disabled = false;
+    submitButton.value = originalButtonText;
+  }
 }
 
-// Função para lidar com o envio do formulário de contato
-function handleSubmit(event) {
-  event.preventDefault();
-  const form = event.target;
-  const formData = new FormData(form);
+// Função para enviar mensagem via WhatsApp
+function enviarWhatsApp() {
+  const nome = document.getElementById('nome').value;
+  const telefone = document.getElementById('telefone').value;
+  const mensagem = document.getElementById('mensagem').value;
   
-  // Aqui você pode adicionar o código para enviar o formulário para seu backend
-  console.log('Dados do formulário:', Object.fromEntries(formData));
+  if (!nome || !telefone || !mensagem) {
+    alert('Por favor, preencha todos os campos');
+    return;
+  }
   
-  alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
-  form.reset();
-  return false;
+  const texto = `Olá! Me chamo ${nome}.\n${mensagem}`;
+  const url = `https://wa.me/5549999135370?text=${encodeURIComponent(texto)}`;
+  window.open(url, '_blank');
 } 
