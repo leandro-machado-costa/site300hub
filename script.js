@@ -75,10 +75,17 @@ async function handleSubmit(event) {
     const response = await fetch('/api/send-email', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       },
       body: JSON.stringify(formData)
     });
+    
+    // Verifica se a resposta é JSON
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      throw new Error('Resposta do servidor não é JSON válido');
+    }
     
     const data = await response.json();
     console.log('Resposta da API:', data); // Log para debug
