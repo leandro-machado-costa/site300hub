@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Allow: /images/
+Allow: /sitemap.xml
+
+Sitemap: https://www.300hub.com.br/sitemap.xml 
