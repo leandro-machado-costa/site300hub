@@ -593,4 +593,24 @@ section:not(.light-section) .section-header h2::after {
   opacity: 0;
   pointer-events: none;
   z-index: -1;
+}
+
+/* Social Links */
+.social-links {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.social-links a {
+  color: var(--light);
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-links a:hover {
+  color: var(--secondary);
+  transform: translateY(-3px);
 } 
