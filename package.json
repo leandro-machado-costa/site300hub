@@ -1,11 +1,12 @@
 {
-  "name": "300hub-site",
+  "name": "site300hubs",
   "version": "1.0.0",
   "description": "Site institucional da 300HUB",
   "main": "index.html",
   "scripts": {
-    "start": "npx serve",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "serve",
+    "dev": "vercel dev",
+    "vercel-build": "echo 'Build step completed'"
   },
   "keywords": [
     "300HUB",
