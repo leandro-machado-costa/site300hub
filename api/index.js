@@ -69,13 +69,13 @@ module.exports = async (req, res) => {
       subject: `Nova mensagem de contato - ${origem || 'Site'}`,
       html: `
         <h2>Nova mensagem de contato</h2>
-        <p><strong>Nome:</strong> ${nome}</p>
-        ${email ? `<p><strong>E-mail:</strong> ${email}</p>` : ''}
-        ${telefone ? `<p><strong>Telefone:</strong> ${telefone}</p>` : ''}
-        ${empresa ? `<p><strong>Empresa:</strong> ${empresa}</p>` : ''}
+        <p><strong>Nome:</strong> ${nome || 'Não informado'}</p>
+        ${email ? `<p><strong>E-mail:</strong> ${email || 'Não informado'}</p>` : ''}
+        ${telefone ? `<p><strong>Telefone:</strong> ${telefone || 'Não informado'}</p>` : ''}
+        ${empresa ? `<p><strong>Empresa:</strong> ${empresa || 'Não informado'}</p>` : ''}
         <p><strong>Origem:</strong> ${origem || 'Site'}</p>
         <p><strong>Mensagem:</strong></p>
-        <p>${mensagem}</p>
+        <p>${mensagem || 'Não informado'}</p>
       `
     };
 
