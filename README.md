@@ -10,6 +10,8 @@ Site institucional da 300HUB, uma consultoria tech especializada em integraçõe
 - Integração com WhatsApp
 - Otimizado para SEO
 - Acessível (WCAG 2.1)
+- Proteção CORS para segurança
+- Deploy automático no Vercel
 
 ## Tecnologias Utilizadas
 
@@ -17,7 +19,8 @@ Site institucional da 300HUB, uma consultoria tech especializada em integraçõe
 - CSS3
 - JavaScript
 - SVG
-- GitHub Pages para hospedagem
+- Vercel para hospedagem e funções serverless
+- Resend para envio de e-mails
 
 ## Estrutura do Projeto
 
@@ -25,19 +28,22 @@ Site institucional da 300HUB, uma consultoria tech especializada em integraçõe
 - `styles.css` - Estilos CSS
 - `script.js` - Funcionalidades JavaScript
 - `images/` - Diretório com imagens do site
+- `api/` - Diretório com funções serverless do Vercel
 
 ## Como Executar Localmente
 
 1. Clone o repositório
-2. Abra o arquivo `index.html` em seu navegador
+2. Instale as dependências: `npm install`
+3. Execute o servidor local: `npm start`
+4. Abra o navegador em `http://localhost:3000`
 
 ## Deploy
 
-O site é automaticamente implantado no GitHub Pages quando alterações são enviadas para a branch `master`.
+O site é automaticamente implantado no Vercel quando alterações são enviadas para a branch `main`.
 
 ## Domínio Personalizado
 
-O site está configurado para usar o domínio personalizado `300hub.com.br` através do GitHub Pages e Cloudflare.
+O site está configurado para usar o domínio personalizado `300hub.com.br` através do Vercel.
 
 ## Personalização
 
@@ -57,11 +63,67 @@ As cores principais do site podem ser alteradas no arquivo `styles.css` através
 
 ### WhatsApp
 
-Para alterar o número do WhatsApp, modifique a URL no arquivo `index.html`:
+Para alterar o número do WhatsApp, modifique a URL no arquivo `script.js`:
 
 ```javascript
 const url = `https://wa.me/5599999999999?text=${encodeURIComponent(texto)}`;
 ```
+
+## Configuração do Vercel e Resend
+
+Para que o formulário de contato e o WhatsApp funcionem corretamente, é necessário configurar o Vercel e o Resend. Siga os passos abaixo:
+
+### 1. Criar uma conta no Vercel
+
+1. Acesse [Vercel](https://vercel.com/) e crie uma conta gratuita.
+2. Conecte sua conta do GitHub ao Vercel.
+3. Importe o repositório do site para o Vercel.
+
+### 2. Criar uma conta no Resend
+
+1. Acesse [Resend](https://resend.com/) e crie uma conta gratuita.
+2. O plano gratuito permite até 100 e-mails por dia (3.000 por mês).
+
+### 3. Obter a chave de API do Resend
+
+1. No painel do Resend, vá para "API Keys" e clique em "Create API Key".
+2. Copie a chave de API gerada.
+
+### 4. Configurar um domínio no Resend (opcional, mas recomendado)
+
+1. No painel do Resend, vá para "Domains" e clique em "Add Domain".
+2. Siga as instruções para verificar seu domínio.
+3. Após a verificação, você poderá usar seu domínio para enviar e-mails.
+
+### 5. Configurar as variáveis de ambiente no Vercel
+
+1. No painel do Vercel, vá para o seu projeto.
+2. Clique em "Settings" > "Environment Variables".
+3. Adicione as seguintes variáveis:
+   - `RESEND_API_KEY`: Sua chave de API do Resend
+   - `CONTACT_EMAIL`: E-mail para onde você quer receber as mensagens (ex: contato@300hub.com.br)
+   - `VERIFIED_DOMAIN`: Seu domínio verificado no Resend (ex: 300hub.com.br)
+
+### 6. Configurar o domínio personalizado no Vercel
+
+1. No painel do Vercel, vá para o seu projeto.
+2. Clique em "Settings" > "Domains".
+3. Adicione seu domínio personalizado (ex: 300hub.com.br).
+4. Siga as instruções para configurar os registros DNS.
+
+## Segurança
+
+### Proteção CORS
+
+O site implementa proteção CORS para garantir que apenas requisições do domínio 300hub.com.br possam enviar e-mails através da API. Isso evita que terceiros mal-intencionados usem sua API para enviar e-mails não autorizados.
+
+Os domínios permitidos são:
+- https://300hub.com.br
+- https://www.300hub.com.br
+- http://localhost:3000 (para desenvolvimento local)
+- http://localhost:5000 (para desenvolvimento local)
+
+Se você precisar adicionar mais domínios permitidos, edite o arquivo `api/send-email.js` e adicione-os à lista `allowedOrigins`.
 
 ## Contribuição
 
