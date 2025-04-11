@@ -56,13 +56,13 @@
       ]
     }
   ],
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/index.js" },
-    { "src": "/favicon.ico", "dest": "/favicon.ico" },
-    { "src": "/favicon/(.*)", "dest": "/favicon/$1" },
-    { "src": "/(.*\\.css)", "dest": "/$1" },
-    { "src": "/(.*\\.js)", "dest": "/$1" },
-    { "src": "/(.*\\.(jpg|jpeg|png|gif|svg))", "dest": "/$1" },
-    { "src": "/(.*)", "dest": "/$1" }
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index.js" },
+    { "source": "/favicon.ico", "destination": "/favicon.ico" },
+    { "source": "/favicon/(.*)", "destination": "/favicon/$1" },
+    { "source": "/(.*\\.css)", "destination": "/$1" },
+    { "source": "/(.*\\.js)", "destination": "/$1" },
+    { "source": "/(.*\\.(jpg|jpeg|png|gif|svg))", "destination": "/$1" },
+    { "source": "/(.*)", "destination": "/$1" }
   ]
 } 
