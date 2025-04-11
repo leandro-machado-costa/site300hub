@@ -597,13 +597,14 @@ section:not(.light-section) .section-header h2::after {
 
 /* Social Links */
 .social-links {
-  margin-top: 1rem;
   display: flex;
   gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
 .social-links a {
-  color: var(--light);
+  color: var(--gray);
   transition: var(--transition);
   display: flex;
   align-items: center;
@@ -612,5 +613,10 @@ section:not(.light-section) .section-header h2::after {
 
 .social-links a:hover {
   color: var(--secondary);
-  transform: translateY(-3px);
+  transform: translateY(-2px);
+}
+
+.social-links svg {
+  width: 24px;
+  height: 24px;
 } 
