@@ -19,10 +19,13 @@ html {
 }
 
 body {
+  margin: 0;
+  padding: 0;
   background-color: var(--primary);
   color: var(--light);
   line-height: 1.6;
   overflow-x: hidden;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 header {
@@ -536,17 +539,17 @@ section:not(.light-section) .section-header h2::after {
 /* Estilo específico para garantir que o logo tenha o tamanho correto */
 .hero-content .logo-link .logo {
   width: 500px !important;
-  height: 150px !important;
+  height: 500px !important;
   object-fit: contain;
-  aspect-ratio: 500/150;
+  aspect-ratio: 1/1;
   transition: transform 0.3s ease;
 }
 
 .logo {
   width: 500px;
-  height: 150px;
+  height: 500px;
   object-fit: contain;
-  aspect-ratio: 500/150;
+  aspect-ratio: 1/1;
   transition: transform 0.3s ease;
 }
 
@@ -560,21 +563,21 @@ section:not(.light-section) .section-header h2::after {
 
 .footer-logo .logo {
   width: 250px;
-  height: 75px;
-  aspect-ratio: 250/75;
+  height: 250px;
+  aspect-ratio: 1/1;
 }
 
 @media (max-width: 768px) {
   .logo {
     width: 400px;
-    height: 120px;
-    aspect-ratio: 400/120;
+    height: 400px;
+    aspect-ratio: 1/1;
   }
   
   .footer-logo .logo {
     width: 200px;
-    height: 60px;
-    aspect-ratio: 200/60;
+    height: 200px;
+    aspect-ratio: 1/1;
   }
 }
 
@@ -656,4 +659,61 @@ section:not(.light-section) .section-header h2::after {
   font-weight: 400;
   font-display: swap;
   src: url(https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2) format('woff2');
+}
+
+/* Estilo do formulário do WhatsApp */
+#whatsappForm {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+  width: 300px;
+  display: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+#whatsappForm h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #333;
+}
+
+#whatsappForm input,
+#whatsappForm textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 6px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+#whatsappForm textarea {
+  height: 100px;
+  resize: none;
+  margin-bottom: 6px;
+}
+
+#whatsappForm button {
+  width: 100%;
+  padding: 12px;
+  background: #25D366;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#whatsappForm button:hover {
+  background: #128C7E;
 } 
