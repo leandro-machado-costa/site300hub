@@ -50,7 +50,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   </noscript>
   
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=1.1">
   
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
@@ -106,13 +106,6 @@
       max-width: 800px;
       min-height: 400px;
     }
-    
-    .logo {
-      width: 300px;
-      height: 90px;
-      object-fit: contain;
-      aspect-ratio: 300/90;
-    }
   </style>
   
   <!-- Preload critical assets -->
@@ -120,8 +113,7 @@
   <link rel="preload" href="styles.css" as="style">
   <link rel="preload" as="font" href="https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2" crossorigin>
   
-  <!-- Defer non-critical CSS -->
-  <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
+  <!-- Removendo a duplicação do carregamento do CSS -->
   <noscript>
     <link rel="stylesheet" href="styles.css">
   </noscript>
@@ -152,7 +144,7 @@
   <header class="hero" role="banner">
     <div class="hero-content">
       <a href="/" class="logo-link" aria-label="300HUB - Página inicial">
-        <img src="images/300hub_logo.webp" alt="300HUB Logo" class="logo" width="300" height="90" loading="eager" fetchpriority="high">
+        <img src="images/300hub_logo.webp" alt="300HUB Logo" class="logo" width="500" height="150" loading="eager" fetchpriority="high">
       </a>
       <h1 class="seo-title">300HUB</h1>
     <p>Integrações, dados e soluções digitais sob medida para acelerar o seu negócio.</p>
@@ -247,7 +239,7 @@
   <footer role="contentinfo">
     <div class="footer-content">
       <div class="footer-logo">
-        <img src="images/300hub_logo.webp" alt="300HUB Logo" class="logo" width="150" height="45" loading="lazy">
+        <img src="images/300hub_logo.webp" alt="300HUB Logo" class="logo" width="250" height="75" loading="lazy">
       </div>
       <div class="footer-info">
     <p>© 2025 300HUB. Todos os direitos reservados.</p>

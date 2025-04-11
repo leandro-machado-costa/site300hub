@@ -526,19 +526,28 @@ section:not(.light-section) .section-header h2::after {
   background-color: var(--secondary);
 }
 
-/* Logo styles */
+/* Logo styles - Ajustado para garantir tamanho correto */
 .logo-link {
   display: block;
   margin-bottom: 2rem;
   text-align: center;
 }
 
-.logo {
-  width: 300px;
-  height: 90px;
+/* Estilo específico para garantir que o logo tenha o tamanho correto */
+.hero-content .logo-link .logo {
+  width: 500px !important;
+  height: 150px !important;
   object-fit: contain;
+  aspect-ratio: 500/150;
   transition: transform 0.3s ease;
-  aspect-ratio: 300/90;
+}
+
+.logo {
+  width: 500px;
+  height: 150px;
+  object-fit: contain;
+  aspect-ratio: 500/150;
+  transition: transform 0.3s ease;
 }
 
 .logo:hover {
@@ -550,9 +559,23 @@ section:not(.light-section) .section-header h2::after {
 }
 
 .footer-logo .logo {
-  width: 150px;
-  height: 45px;
-  aspect-ratio: 150/45;
+  width: 250px;
+  height: 75px;
+  aspect-ratio: 250/75;
+}
+
+@media (max-width: 768px) {
+  .logo {
+    width: 400px;
+    height: 120px;
+    aspect-ratio: 400/120;
+  }
+  
+  .footer-logo .logo {
+    width: 200px;
+    height: 60px;
+    aspect-ratio: 200/60;
+  }
 }
 
 /* Footer styles */
