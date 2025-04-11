@@ -40,7 +40,16 @@
   <!-- Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Preload critical fonts -->
+  <link rel="preload" as="font" href="https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2" crossorigin>
+  
+  <!-- Google Fonts with display swap -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </noscript>
+  
   <link rel="stylesheet" href="styles.css">
   
   <!-- Favicons -->
@@ -88,7 +97,7 @@
   <header class="hero" role="banner">
     <div class="hero-content">
       <a href="/" class="logo-link" aria-label="300HUB - Página inicial">
-        <img src="images/logo.png" alt="300HUB Logo" class="logo" width="300" height="90">
+        <img src="images/300hub_logo.webp" alt="300HUB Logo" class="logo" width="300" height="90" loading="eager" fetchpriority="high">
       </a>
       <h1 class="seo-title">300HUB</h1>
       <p>Integrações, dados e soluções digitais sob medida para acelerar o seu negócio.</p>
@@ -125,7 +134,7 @@
         </div>
         <div class="about-image">
           <div class="image-container">
-            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Equipe 300HUB trabalhando">
+            <img src="images/team.webp" alt="Equipe 300HUB trabalhando" width="1024" height="683" loading="lazy">
           </div>
         </div>
       </div>
@@ -183,7 +192,7 @@
   <footer role="contentinfo">
     <div class="footer-content">
       <div class="footer-logo">
-        <img src="images/logo.png" alt="300HUB Logo" class="logo" width="150" height="45">
+        <img src="images/300hub_logo.webp" alt="300HUB Logo" class="logo" width="150" height="45" loading="lazy">
       </div>
       <div class="footer-info">
         <p>© 2025 300HUB. Todos os direitos reservados.</p>
