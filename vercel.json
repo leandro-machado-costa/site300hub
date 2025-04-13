@@ -58,6 +58,10 @@
   ],
   "rewrites": [
     {
+      "source": "/api/send-email",
+      "destination": "/api/index.js"
+    },
+    {
       "source": "/(.*)\\.(jpg|jpeg|png|gif|svg)$",
       "destination": "/images/$1.$2"
     }
