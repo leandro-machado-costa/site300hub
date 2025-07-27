@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  n8n:
+    image: n8nio/n8n
+    restart: always
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=admin
+      - N8N_BASIC_AUTH_PASSWORD=senha-forte
+      - N8N_HOST=n8n.seudominio.com
+      - N8N_PORT=5678
+      - WEBHOOK_TUNNEL_URL=https://n8n.seudominio.com
+    volumes:
+      - ./n8n_data:/home/node/.n8n
+    networks:
+      - web
+
+  caddy:
+    image: caddy:2
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - web
+
+volumes:
+  caddy_data:
+  caddy_config:
+
+networks:
+  web:
+    driver: bridge
